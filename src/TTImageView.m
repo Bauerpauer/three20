@@ -49,7 +49,13 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
+		self.autoresizesSubviews = NO;
+		
     _autoresizesToImage = NO;
+    _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+		_activityView.hidesWhenStopped = YES;
+
+		[self addSubview:_activityView];
   }
   return self;
 }
@@ -63,6 +69,7 @@
   TT_RELEASE_SAFELY(_urlPath);
   TT_RELEASE_SAFELY(_image);
   TT_RELEASE_SAFELY(_defaultImage);
+	TT_RELEASE_SAFELY(_activityView);
   [super dealloc];
 }
 
@@ -84,6 +91,11 @@
   if (self.style) {
     [super drawRect:rect];
   }
+}
+
+- (void)setFrame:(CGRect)rect {
+	[super setFrame:rect];
+	[_activityView setCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)];
 }
 
 
@@ -133,7 +145,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)request:(TTURLRequest*)request didFailLoadWithError:(NSError*)error {
   TT_RELEASE_SAFELY(_request);
-
+	
+	// NSLog(@"");
+	
   [self imageViewDidFailLoadWithError:error];
   if ([_delegate respondsToSelector:@selector(imageView:didFailLoadWithError:)]) {
     [_delegate imageView:self didFailLoadWithError:error];
@@ -202,6 +216,9 @@
       self.image = image;
 
     } else {
+			_image = nil;
+			[self setNeedsDisplay];
+
       TTURLRequest* request = [TTURLRequest requestWithURL:_urlPath delegate:self];
       request.response = [[[TTURLImageResponse alloc] init] autorelease];
 
@@ -218,22 +235,29 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)stopLoading {
+	[_activityView stopAnimating];
   [_request cancel];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)imageViewDidStartLoad {
+	[_activityView startAnimating];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)imageViewDidLoadImage:(UIImage*)image {
+	[_activityView stopAnimating];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)imageViewDidFailLoadWithError:(NSError*)error {
+	NSLog(@"imageViewDidFailLoadWithError: %@", error);
+	_image = nil;
+	[self setNeedsDisplay];
+	[_activityView stopAnimating];
 }
 
 

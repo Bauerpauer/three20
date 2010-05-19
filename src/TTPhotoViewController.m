@@ -683,7 +683,7 @@ static const NSInteger kActivityLabelTag = 96;
   if (_photoSource != photoSource) {
     [_photoSource release];
     _photoSource = [photoSource retain];
-    
+
     [self moveToPhotoAtIndex:0 withDelay:NO];
     self.model = _photoSource;
   }

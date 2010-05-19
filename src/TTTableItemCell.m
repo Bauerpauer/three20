@@ -821,6 +821,7 @@ static const CGFloat kDefaultMessageImageHeight = 34;
     self.animating = item.isLoading;
 
     self.textLabel.textColor = TTSTYLEVAR(moreLinkTextColor);
+	self.detailTextLabel.textColor = TTSTYLEVAR(moreLinkTextColor);
     self.selectionStyle = TTSTYLEVAR(tableSelectionStyle);
   }  
 }

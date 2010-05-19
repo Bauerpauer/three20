@@ -31,6 +31,7 @@
   UIImage*      _image;
   UIImage*      _defaultImage;
   BOOL          _autoresizesToImage;
+  UIActivityIndicatorView* _activityView;
 
   id<TTImageViewDelegate> _delegate;
 }

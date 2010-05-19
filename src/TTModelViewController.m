@@ -311,6 +311,7 @@
 }
 
 - (BOOL)shouldLoad {
+	NSLog(@"TTModelViewController shouldLoad %d", self.model.isLoaded);
   return !self.model.isLoaded;
 }
 
@@ -343,15 +344,23 @@
   
   BOOL loading = self.model.isLoading;
   BOOL loaded = self.model.isLoaded;
+
+NSLog(@"REFRESH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! %d   %d   %d", loading, loaded, [self shouldLoad]);
+
   if (!loading && !loaded && [self shouldLoad]) {
+	NSLog(@"Load 1");
     [self.model load:TTURLRequestCachePolicyDefault more:NO];
   } else if (!loading && loaded && [self shouldReload]) {
+	NSLog(@"Load 2");
     [self.model load:TTURLRequestCachePolicyNetwork more:NO];
   } else if (!loading && [self shouldLoadMore]) {
+	NSLog(@"Load 3");
     [self.model load:TTURLRequestCachePolicyDefault more:YES];
   } else {
+	NSLog(@"Load ?");
     _flags.isModelDidLoadInvalid = YES;
     if (_isViewAppearing) {
+	NSLog(@"Load ??");
       [self updateView];
     }
   }

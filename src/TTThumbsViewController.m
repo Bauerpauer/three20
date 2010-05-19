@@ -327,7 +327,6 @@ static CGFloat kThumbSpacing = 4;
   if ([_delegate respondsToSelector:@selector(thumbsViewController:shouldNavigateToPhoto:)]) {
     shouldNavigate = [_delegate thumbsViewController:self shouldNavigateToPhoto:photo];
   }
-
   if (shouldNavigate) {
     NSString* URL = [self URLForPhoto:photo];
     if (URL) {
@@ -335,7 +334,7 @@ static CGFloat kThumbSpacing = 4;
     } else {
       TTPhotoViewController* controller = [self createPhotoViewController];
       controller.centerPhoto = photo;
-      [self.navigationController pushViewController:controller animated:YES];  
+      [self.navigationController pushViewController:controller animated:YES];
     }
   }
 }

@@ -175,7 +175,8 @@ static const NSInteger kLoadMaxRetries = 2;
   _response = [response retain];
   NSDictionary* headers = [response allHeaderFields];
   int contentLength = [[headers objectForKey:@"Content-Length"] intValue];
-  
+	NSLog(@"_queue.maxContentLength == %i", _queue.maxContentLength);
+	NSLog(@"Received Headers: %@", headers);
   TTDASSERT(0 == _queue.maxContentLength || contentLength <=_queue.maxContentLength);
   if (contentLength > _queue.maxContentLength && _queue.maxContentLength) {
     TTDCONDITIONLOG(TTDFLAG_URLREQUEST, @"MAX CONTENT LENGTH EXCEEDED (%d) %@", contentLength, _URL);

@@ -177,7 +177,7 @@
     UINavigationBar* bar = self.navigationController.navigationBar;
     bar.tintColor = _navigationBarTintColor;
     bar.barStyle = _navigationBarStyle;
-    [[UIApplication sharedApplication] setStatusBarStyle:_statusBarStyle animated:YES];
+//    [[UIApplication sharedApplication] setStatusBarStyle:_statusBarStyle animated:YES];
   }
 
   // Ugly hack to work around UISearchBar's inability to resize its text field
