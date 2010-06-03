@@ -54,6 +54,7 @@
     _autoresizesToImage = NO;
     _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 		_activityView.hidesWhenStopped = YES;
+		_activityView.center = self.center;
 
 		[self addSubview:_activityView];
   }
@@ -254,7 +255,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)imageViewDidFailLoadWithError:(NSError*)error {
-	NSLog(@"imageViewDidFailLoadWithError: %@", error);
+	// NSLog(@"imageViewDidFailLoadWithError: %@", error);
 	_image = nil;
 	[self setNeedsDisplay];
 	[_activityView stopAnimating];

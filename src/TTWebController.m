@@ -345,12 +345,12 @@
       docView.top += headerView.height;
       docView.height -= headerView.height; 
     } else if (removingHeader) {
-NSLog(@"setHeaderView REMOVINGHEADER 1:  top: %d, height: %d", docView.top, docView.height);
+// NSLog(@"setHeaderView REMOVINGHEADER 1:  top: %d, height: %d", docView.top, docView.height);
 // docView.top = 0;
       // docView.top -= headerView.height;
       // docView.height += headerView.height; 
 
-NSLog(@"setHeaderView REMOVINGHEADER 2:  top: %d, height: %d", docView.top, docView.height);
+// NSLog(@"setHeaderView REMOVINGHEADER 2:  top: %d, height: %d", docView.top, docView.height);
     }
   }
 }

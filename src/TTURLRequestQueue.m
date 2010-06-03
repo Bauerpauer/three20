@@ -469,40 +469,52 @@ static TTURLRequestQueue* gMainQueue = nil;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSURLRequest*)createNSURLRequest:(TTURLRequest*)request URL:(NSURL*)URL {
+	TTDPRINT(@"createNSURLRequest: %@", request);
+	
   if (!URL) {
     URL = [NSURL URLWithString:request.URL];
   }
   
-  NSMutableURLRequest* URLRequest = [NSMutableURLRequest requestWithURL:URL
+  NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:URL
                                     cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                     timeoutInterval:kTimeout];
-  [URLRequest setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
+  [urlRequest setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
 
   if (request) {
-    [URLRequest setHTTPShouldHandleCookies:request.shouldHandleCookies];
+    [urlRequest setHTTPShouldHandleCookies:request.shouldHandleCookies];
     
     NSString* method = request.httpMethod;
     if (method) {
-      [URLRequest setHTTPMethod:method];
+      [urlRequest setHTTPMethod:method];
     }
     
     NSString* contentType = request.contentType;
     if (contentType) {
-      [URLRequest setValue:contentType forHTTPHeaderField:@"Content-Type"];
+      [urlRequest setValue:contentType forHTTPHeaderField:@"Content-Type"];
     }
     
     NSData* body = request.httpBody;
     if (body) {
-      [URLRequest setHTTPBody:body];
+      [urlRequest setHTTPBody:body];
     }
 
     NSDictionary* headers = request.headers;
+		// TTDPRINT("the headers are: %@", headers);
     for (NSString *key in [headers keyEnumerator]) {
-      [URLRequest setValue:[headers objectForKey:key] forHTTPHeaderField:key];
+			// TTDPRINT("Setting NSMutableURLRequest Header Field %@ to %@", key, [headers objectForKey:key]);
+      [urlRequest setValue:[headers objectForKey:key] forHTTPHeaderField:key];
+    }
+
+		NSArray* cookies = request.cookies;
+		NSDictionary* cookieHeaders = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+		// TTDPRINT("COOKIES: the headers are: %@", headers);
+    for (NSString *key in [cookieHeaders keyEnumerator]) {
+			// TTDPRINT("COOKIES: Setting NSMutableURLRequest Header Field %@ to %@", key, [cookieHeaders objectForKey:key]);
+      [urlRequest setValue:[cookieHeaders objectForKey:key] forHTTPHeaderField:key];
     }
   }
   
-  return URLRequest;
+  return urlRequest;
 }
 
 

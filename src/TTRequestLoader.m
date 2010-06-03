@@ -114,6 +114,7 @@ static const NSInteger kLoadMaxRetries = 2;
     request.totalBytesExpected = bytesExpected;
     
     for (id<TTURLRequestDelegate> delegate in request.delegates) {
+//NSLog(@"dispatchLoadedBytes In Loop: %@", delegate);
       if ([delegate respondsToSelector:@selector(requestDidUploadData:)]) {
         [delegate requestDidUploadData:request];
       }
@@ -175,8 +176,8 @@ static const NSInteger kLoadMaxRetries = 2;
   _response = [response retain];
   NSDictionary* headers = [response allHeaderFields];
   int contentLength = [[headers objectForKey:@"Content-Length"] intValue];
-	NSLog(@"_queue.maxContentLength == %i", _queue.maxContentLength);
-	NSLog(@"Received Headers: %@", headers);
+	// NSLog(@"_queue.maxContentLength == %i", _queue.maxContentLength);
+	// NSLog(@"Received Headers: %@", headers);
   TTDASSERT(0 == _queue.maxContentLength || contentLength <=_queue.maxContentLength);
   if (contentLength > _queue.maxContentLength && _queue.maxContentLength) {
     TTDCONDITIONLOG(TTDFLAG_URLREQUEST, @"MAX CONTENT LENGTH EXCEEDED (%d) %@", contentLength, _URL);
@@ -307,9 +308,11 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
     
     TT_RELEASE_SAFELY(_responseData);
     TT_RELEASE_SAFELY(_connection);
-    
-    [_queue performSelector:@selector(loader:didFailLoadWithError:) withObject:self
-                 withObject:error];
+
+    if ([_queue respondsToSelector:@selector(loader:didFailLoadWithError:)]) {
+    	[_queue performSelector:@selector(loader:didFailLoadWithError:) withObject:self
+                 	withObject:error];
+		}
   } else {
     [self connection:nil didReceiveResponse:(NSHTTPURLResponse*)response];
     [self connection:nil didReceiveData:data];

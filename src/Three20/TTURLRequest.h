@@ -32,6 +32,7 @@
   NSData*               _httpBody;
   NSMutableDictionary*  _parameters;
   NSMutableDictionary*  _headers;
+  NSMutableArray*  			_cookies;
 
   NSString*             _contentType;
   NSStringEncoding      _charsetForMultipart;
@@ -107,6 +108,11 @@
  * Custom HTTP headers.
  */
 @property(nonatomic,readonly) NSMutableDictionary* headers;
+
+/**
+ * Custom Cookies.
+ */
+@property(nonatomic,retain) NSMutableArray* cookies;
 
 /**
  * @default TTURLRequestCachePolicyDefault
