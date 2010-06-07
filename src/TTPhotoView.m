@@ -39,10 +39,14 @@
 // private
 
 - (BOOL)loadVersion:(TTPhotoVersion)version fromNetwork:(BOOL)fromNetwork {
+	TTDPRINT(@"%@ TTPhotoView loadVersion", self);
+	
   NSString* URL = [_photo URLForVersion:version];
   if (URL) {
+		TTDPRINT(@"%@ TTPhotoView imageViewDidStartLoad -- %@", self, URL);
     UIImage* image = [[TTURLCache sharedCache] imageForURL:URL];
     if (image || fromNetwork) {
+			TTDPRINT(@"%@ TTPhotoView imageViewDidStartLoad -- setting urlPath -- %@", self, URL);
       _photoVersion = version;
       self.urlPath = URL;
       return YES;
@@ -79,7 +83,7 @@
     _photoVersion = TTPhotoVersionNone;
     _hidesExtras = NO;
     _hidesCaption = NO;
-    
+		self.showActivity = NO;
     self.clipsToBounds = NO;
   }
   return self;
@@ -100,10 +104,14 @@
 // UIImageView
 
 - (void)setImage:(UIImage*)image {
+	TTDPRINT(@"%@ TTPhotoView setImage: %@", self, image);
+	
   if (image != _defaultImage || !_photo || self.urlPath != [_photo URLForVersion:TTPhotoVersionLarge]) {
     if (image == _defaultImage) {
+			TTDPRINT(@"%@ TTPhotoView setImage: %@ SETTING DEFAULT IMATE", self, image);
       self.contentMode = UIViewContentModeCenter;
     } else {
+			TTDPRINT(@"%@ TTPhotoView setImage: %@ ASPECT FILL", self, image);
       self.contentMode = UIViewContentModeScaleAspectFill;
     }
     [super setImage:image];
@@ -111,16 +119,21 @@
 }
 
 - (void)imageViewDidStartLoad {
+	TTDPRINT(@"%@ TTPhotoView imageViewDidStartLoad", self);
   [self showProgress:0];
 }
 
 - (void)imageViewDidLoadImage:(UIImage*)image {
+	TTDPRINT(@"%@ TTPhotoView imageViewDidLoadImage 0", self);
   if (!_photo.photoSource.isLoading) {
+		TTDPRINT(@"%@ TTPhotoView imageViewDidLoadImage 1", self);
     [self showProgress:-1];
     [self showStatus:nil];
   }
   
   if (!_photo.size.width) {
+	
+		TTDPRINT(@"%@ TTPhotoView for %@ has size %@, imageViewDidLoadImage 2", self, _photo, NSStringFromCGSize(_photo.size));
     _photo.size = image.size;
     [self.superview setNeedsLayout];
   }
@@ -186,6 +199,7 @@
 // public
 
 - (void)setPhoto:(id<TTPhoto>)photo {
+	TTDPRINT(@"%@ TTPhotoView setPhoto: %@", self, photo);
   if (!photo || photo != _photo) {
     [_photo release];
     _photo = [photo retain];

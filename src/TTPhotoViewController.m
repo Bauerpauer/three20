@@ -173,6 +173,7 @@ static const NSInteger kActivityLabelTag = 96;
 - (TTPhotoView*)statusView {
   if (!_photoStatusView) {
     _photoStatusView = [[TTPhotoView alloc] initWithFrame:_scrollView.frame];
+		_photoStatusView.showActivity = NO;
     _photoStatusView.defaultImage = _defaultImage;
     _photoStatusView.photo = nil;
     [_innerView addSubview:_photoStatusView];
@@ -602,9 +603,9 @@ static const NSInteger kActivityLabelTag = 96;
   [self showBars:NO animated:YES];
 }
 
-- (void)scrollViewDidEndDecelerating:(TTScrollView*)scrollView {
-  [self startImageLoadTimer:kPhotoLoadShortDelay];
-}
+// - (void)scrollViewDidEndDecelerating:(TTScrollView*)scrollView {
+//   [self startImageLoadTimer:kPhotoLoadShortDelay];
+// }
 
 - (void)scrollViewWillRotate:(TTScrollView*)scrollView
         toOrientation:(UIInterfaceOrientation)orientation {

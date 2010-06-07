@@ -31,6 +31,7 @@
   UIImage*      _image;
   UIImage*      _defaultImage;
   BOOL          _autoresizesToImage;
+	BOOL					_showActivity;
   UIActivityIndicatorView* _activityView;
 
   id<TTImageViewDelegate> _delegate;
@@ -84,6 +85,8 @@
  * A delegate that notifies you when the image has started and finished loading.
  */
 @property(nonatomic,assign)   id<TTImageViewDelegate> delegate;
+
+@property(nonatomic) BOOL      showActivity;
 
 /**
  * Cancel any pending request, remove the image, and redraw the view.
