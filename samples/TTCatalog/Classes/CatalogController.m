@@ -1,5 +1,4 @@
 #import "CatalogController.h"
-#import "Three20/developer.h"
 
 @implementation CatalogController
 
@@ -41,11 +40,12 @@
     [TTTableTextItem itemWithText:@"Table Controls" URL:@"tt://tableControlsTest"],
     [TTTableTextItem itemWithText:@"Styled Labels in Table" URL:@"tt://styledTextTableTest"],
     [TTTableTextItem itemWithText:@"Web Images in Table" URL:@"tt://imageTest2"],
-  
+    [TTTableTextItem itemWithText:@"Table With Shadow" URL:@"tt://tableWithShadow"],
+
     @"Models",
     [TTTableTextItem itemWithText:@"Model Search" URL:@"tt://searchTest"],
     [TTTableTextItem itemWithText:@"Model States" URL:@"tt://tableTest"],
-    
+
     @"General",
     [TTTableTextItem itemWithText:@"Web Image" URL:@"tt://imageTest1"],
     [TTTableTextItem itemWithText:@"YouTube Player" URL:@"tt://youTubeTest"],
