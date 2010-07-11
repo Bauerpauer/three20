@@ -40,6 +40,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 @synthesize httpBody    = _httpBody;
 @synthesize parameters  = _parameters;
 @synthesize headers     = _headers;
+@synthesize cookies     = _cookies;
 
 @synthesize contentType           = _contentType;
 @synthesize charsetForMultipart   = _charsetForMultipart;
@@ -111,6 +112,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
   TT_RELEASE_SAFELY(_contentType);
   TT_RELEASE_SAFELY(_parameters);
   TT_RELEASE_SAFELY(_headers);
+  TT_RELEASE_SAFELY(_cookies);
   TT_RELEASE_SAFELY(_cacheKey);
   TT_RELEASE_SAFELY(_userInfo);
   TT_RELEASE_SAFELY(_timestamp);
