@@ -269,12 +269,11 @@
 
   if (nil == _urlPath || 0 == _urlPath.length) {
     // Setting the url path to an empty/nil path, so let's restore the default image.
-    self.image = _defaultImage;
+    [self setImage: _defaultImage];
 
   } else {
     [self reload];
   }
 }
-
 
 @end

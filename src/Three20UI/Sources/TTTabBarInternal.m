@@ -88,3 +88,6 @@ static  CGFloat   kPadding        = 10;
 
 
 @end
+
+#import "Three20Core/CategoryFix.h"
+FIX_CATEGORY_BUG(TTTabBarTTInternalAdditions)
