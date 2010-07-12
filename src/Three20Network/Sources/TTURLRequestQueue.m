@@ -36,7 +36,7 @@
 static const NSTimeInterval kFlushDelay = 0.3;
 static const NSTimeInterval kTimeout = 300.0;
 static const NSInteger kMaxConcurrentLoads = 5;
-static NSUInteger kDefaultMaxContentLength = 150000;
+static NSUInteger kDefaultMaxContentLength = 1500000;
 
 static TTURLRequestQueue* gMainQueue = nil;
 

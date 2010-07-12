@@ -38,6 +38,8 @@
 // Network
 #import "Three20Network/TTURLCache.h"
 #import "Three20Network/TTURLRequestQueue.h"
+#import "Three20Network/TTURLRequest.h"
+#import "Three20Network/TTURLImageResponse.h"
 
 // Core
 #import "Three20Core/TTCorePreprocessorMacros.h"
@@ -297,6 +299,30 @@
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)reload {
+  if (nil == _request && nil != _urlPath) {
+    UIImage* image = [[TTURLCache sharedCache] imageForURL:_urlPath];
+
+    if (nil != image) {
+      self.image = image;
+
+    } else {
+      TTURLRequest* request = [TTURLRequest requestWithURL:_urlPath delegate:self];
+      request.response = [[[TTURLImageResponse alloc] init] autorelease];
+      
+      [request send];
+
+      // // TODO: Hackety Hack to get rid of flicker?
+      // if (![request send]) {
+      //   // Put the default image in place while waiting for the request to load
+      //   if (_defaultImage && self.image != _defaultImage) {
+      //     self.image = _defaultImage;
+      //   }
+      // }
+    }
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)showProgress:(CGFloat)progress {
