@@ -172,7 +172,7 @@
     UINavigationBar* bar = self.navigationController.navigationBar;
     bar.tintColor = _navigationBarTintColor;
     bar.barStyle = _navigationBarStyle;
-    [[UIApplication sharedApplication] setStatusBarStyle:_statusBarStyle animated:YES];
+    // [[UIApplication sharedApplication] setStatusBarStyle:_statusBarStyle animated:YES];
   }
 }
 
@@ -180,7 +180,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
-
   _isViewAppearing = NO;
 }
 

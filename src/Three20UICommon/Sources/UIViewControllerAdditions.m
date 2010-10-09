@@ -309,8 +309,18 @@ static const NSTimeInterval kGarbageCollectionInterval = 20;
   }
   self.navigationController.navigationBar.alpha = show ? 1 : 0;
   if (animated) {
+    [self performSelector:@selector(updateFrameAfterHidingOrShowingBars) withObject:NULL afterDelay:TT_TRANSITION_DURATION];
     [UIView commitAnimations];
+  } else {
+    [self updateFrameAfterHidingOrShowingBars];
   }
+}
+
+- (void)updateFrameAfterHidingOrShowingBars {
+//  CGRect rect = [UIScreen mainScreen].applicationFrame;
+//  self.view.frame = rect;
+//
+//  [self.view setNeedsLayout];
 }
 
 

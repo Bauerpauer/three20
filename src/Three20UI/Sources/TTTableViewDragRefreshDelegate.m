@@ -134,6 +134,11 @@ static const CGFloat kRefreshDeltaY = -65.0f;
   if (scrollView.contentOffset.y <= kRefreshDeltaY && !_controller.model.isLoading) {
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"DragRefreshTableReload" object:nil];
+
+    // Treat this as a "Force Refresh", tell the model to invalidate cache, the tell then
+    // controller to load.  This is gross, we should be able to simply tell the
+    // _controller to reload, but the caching concerns are so screwed up in three20....
+    [_controller.model invalidate:YES];
     [_controller.model load:TTURLRequestCachePolicyNetwork more:NO];
   }
 

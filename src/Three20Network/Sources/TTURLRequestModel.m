@@ -85,14 +85,14 @@
     return nil != _loadedTime;
 
   } else {
-    NSDate* loadedTime = self.loadedTime;
-
-    if (nil != loadedTime) {
-      return -[loadedTime timeIntervalSinceNow] > [TTURLCache sharedCache].invalidationAge;
-
-    } else {
-      return NO;
-    }
+      NSDate* loadedTime = self.loadedTime;
+  
+      if (nil != loadedTime) {
+        return -[loadedTime timeIntervalSinceNow] > [TTURLCache sharedCache].invalidationAge;
+  
+      } else {
+        return NO;
+      }
   }
 }
 
@@ -134,6 +134,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)requestDidFinishLoad:(TTURLRequest*)request {
+
   if (!self.isLoadingMore) {
     [_loadedTime release];
     _loadedTime = [request.timestamp retain];

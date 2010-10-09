@@ -192,7 +192,8 @@ static const CGFloat kDefaultThumbSize = 75;
 
     if (!_photo) {
       for (TTThumbView* thumbView in _thumbViews) {
-        thumbView.thumbURL = nil;
+        // thumbView.thumbURL = nil;
+        thumbView.thumbURL = @"bundle://photo-grid-default-thumbnail.png";
       }
       return;
     }

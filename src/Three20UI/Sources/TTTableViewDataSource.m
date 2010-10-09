@@ -246,7 +246,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (Class)tableView:(UITableView*)tableView cellClassForObject:(id)object {
-  if ([object isKindOfClass:[TTTableItem class]]) {
+  if ([object respondsToSelector:@selector(cellClass)]) {
+    return [object cellClass];
+  } else if ([object isKindOfClass:[TTTableItem class]]) {
     if ([object isKindOfClass:[TTTableMoreButton class]]) {
       return [TTTableMoreButtonCell class];
     } else if ([object isKindOfClass:[TTTableSubtextItem class]]) {

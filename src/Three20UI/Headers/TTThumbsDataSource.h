@@ -16,6 +16,7 @@
 
 // UI
 #import "Three20UI/TTTableViewDataSource.h"
+#import "Three20UI/TTTableMoreButton.h"
 
 @protocol TTPhotoSource;
 @protocol TTThumbsTableViewCellDelegate;
@@ -30,5 +31,7 @@
 
 - (id)initWithPhotoSource: (id<TTPhotoSource>)photoSource
                  delegate: (id<TTThumbsTableViewCellDelegate>)delegate;
+
+- (TTTableMoreButton*)moreButtonItemWithText:(NSString*)text andSubtitle:(NSString*)subtitle;
 
 @end

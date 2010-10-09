@@ -609,7 +609,10 @@ static TTURLRequestQueue* gMainQueue = nil;
 
       [[TTURLCache sharedCache] storeData:data forKey:loader.cacheKey];
     }
+    // TODO: VERIFY
+    NSDate *timeStamp = [[NSDate alloc] init];
     [loader dispatchLoaded:[NSDate date]];
+    [timeStamp release];
   }
   [loader release];
 

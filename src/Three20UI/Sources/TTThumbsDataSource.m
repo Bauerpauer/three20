@@ -134,13 +134,16 @@ static CGFloat kThumbSpacing = 4;
                  TTFormatInteger(_photoSource.numberOfPhotos)];
     }
 
-    return [TTTableMoreButton itemWithText:text subtitle:caption];
+	return [self moreButtonItemWithText:text andSubtitle:caption];
   } else {
     NSInteger columnCount = self.columnCount;
     return [_photoSource photoAtIndex:indexPath.row * columnCount];
   }
 }
 
+- (TTTableMoreButton*)moreButtonItemWithText:(NSString*)text andSubtitle:(NSString*)subtitle {
+  return [TTTableMoreButton itemWithText:text subtitle:subtitle];
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (Class)tableView:(UITableView*)tableView cellClassForObject:(id)object {

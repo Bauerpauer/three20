@@ -36,6 +36,10 @@
     [self setStylesWithSelector:@"thumbView:"];
   }
 
+  // HACK
+  // UIImageView* loadingView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photo-grid-default-thumbnail.png"]];
+  // [self addSubview:loadingView];
+
   return self;
 }
 

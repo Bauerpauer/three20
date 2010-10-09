@@ -241,6 +241,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)modelDidFinishLoad:(id<TTModel>)model {
+//  [self logFlags];
   if (model == _model) {
     TT_RELEASE_SAFELY(_modelError);
     _flags.isModelDidLoadInvalid = YES;
@@ -388,7 +389,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)shouldReload {
-  return !_modelError && self.model.isOutdated;
+  // return !_modelError && self.model.isOutdated;
+  return !_modelError && !self.model.isLoaded && self.model.isOutdated;
 }
 
 
@@ -406,8 +408,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)reload {
-  _flags.isViewInvalid = YES;
-  [self.model load:TTURLRequestCachePolicyNetwork more:NO];
+//  [self logFlags];
+  if (!self.model.isLoading) {
+    _flags.isViewInvalid = YES;
+    [self.model load:TTURLRequestCachePolicyNetwork more:NO];
+  }
 }
 
 
@@ -423,6 +428,8 @@
 - (void)refresh {
   _flags.isViewInvalid = YES;
   _flags.isModelDidRefreshInvalid = YES;
+
+//  [self logFlags];
 
   BOOL loading = self.model.isLoading;
   BOOL loaded = self.model.isLoaded;
@@ -527,5 +534,31 @@
 - (void)showError:(BOOL)show {
 }
 
+// - (void)logFlags {
+//   NSLog(@"logFlags:\n\tisModelDidRefreshInvalid: %i"
+//   @"\tisModelWillLoadInvalid: %i"
+//   @"\tisModelDidLoadInvalid: %i"
+//   @"\tisModelDidLoadFirstTimeInvalid: %i"
+//   @"\tisModelDidShowFirstTimeInvalid: %i"
+//   @"\tisViewInvalid: %i"
+//   @"\tisViewSuspended: %i"
+//   @"\tisUpdatingView: %i"
+//   @"\tisShowingEmpty: %i"
+//   @"\tisShowingLoading: %i"
+//   @"\tisShowingModel: %i"
+//   @"\tisShowingError: %i",
+//   _flags.isModelDidRefreshInvalid,
+//   _flags.isModelWillLoadInvalid,
+//   _flags.isModelDidLoadInvalid,
+//   _flags.isModelDidLoadFirstTimeInvalid,
+//   _flags.isModelDidShowFirstTimeInvalid,
+//   _flags.isViewInvalid,
+//   _flags.isViewSuspended,
+//   _flags.isUpdatingView,
+//   _flags.isShowingEmpty,
+//   _flags.isShowingLoading,
+//   _flags.isShowingModel,
+//   _flags.isShowingError);
+// }
 
 @end
