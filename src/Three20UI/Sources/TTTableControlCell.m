@@ -103,7 +103,7 @@ static const CGFloat kControlPadding = 8;
     view = controlItem.control;
   }
 
-  CGFloat height = view.height;
+  CGFloat height;
   if (YES || !height) { // JAB: Again, always calculate because it f****** changes.
     if ([view isKindOfClass:[UITextView class]]) {
       UITextView* textView = (UITextView*)view;

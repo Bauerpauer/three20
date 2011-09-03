@@ -55,7 +55,9 @@ static CGFloat kThumbnailRowHeight = 79;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-  if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+  if (self) {
     self.statusBarStyle = UIStatusBarStyleBlackTranslucent;
     self.navigationBarStyle = UIBarStyleBlackTranslucent;
     self.navigationBarTintColor = nil;
@@ -66,10 +68,11 @@ static CGFloat kThumbnailRowHeight = 79;
   return self;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithDelegate:(id<TTThumbsViewControllerDelegate>)delegate {
-  if (self = [self initWithNibName:nil bundle:nil]) {
+  self = [self initWithNibName:nil bundle:nil];
+
+  if (self) {
     self.delegate = delegate;
   }
 
@@ -93,7 +96,9 @@ static CGFloat kThumbnailRowHeight = 79;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)init {
-  if (self = [self initWithNibName:nil bundle:nil]) {
+  self = [self initWithNibName:nil bundle:nil];
+
+  if (self) {
   }
 
   return self;
@@ -159,7 +164,7 @@ static CGFloat kThumbnailRowHeight = 79;
   self.tableView.rowHeight = kThumbnailRowHeight;
   self.tableView.autoresizingMask =
   UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
+  self.tableView.backgroundColor = TTSTYLEVAR(thumbnailTableBackgroundColor);
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   [self updateTableLayout];
 }
