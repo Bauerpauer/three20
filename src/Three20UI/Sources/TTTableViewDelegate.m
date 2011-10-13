@@ -106,6 +106,9 @@
   return nil;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.0;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /**
