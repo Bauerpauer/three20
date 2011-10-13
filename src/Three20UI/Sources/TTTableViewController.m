@@ -643,33 +643,33 @@ static const CGFloat kBannerViewHeight = 22;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)setTableBannerView:(UIView*)tableBannerView animated:(BOOL)animated {
   TT_INVALIDATE_TIMER(_bannerTimer);
-  if (tableBannerView != _tableBannerView) {
-    if (_tableBannerView) {
-      if (animated) {
-        [self fadeOutView:_tableBannerView];
-      } else {
-        [_tableBannerView removeFromSuperview];
-      }
-    }
-
-    [_tableBannerView release];
-    _tableBannerView = [tableBannerView retain];
-
-    if (_tableBannerView) {
-      _tableBannerView.frame = [self rectForBannerView];
-      _tableBannerView.userInteractionEnabled = NO;
-      [self addToOverlayView:_tableBannerView];
-
-      if (animated) {
-        _tableBannerView.top += kBannerViewHeight;
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:TT_TRANSITION_DURATION];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        _tableBannerView.top -= kBannerViewHeight;
-        [UIView commitAnimations];
-      }
-    }
-  }
+  // if (tableBannerView != _tableBannerView) {
+  //   if (_tableBannerView) {
+  //     if (animated) {
+  //       [self fadeOutView:_tableBannerView];
+  //     } else {
+  //       [_tableBannerView removeFromSuperview];
+  //     }
+  //   }
+  //
+  //   [_tableBannerView release];
+  //   _tableBannerView = [tableBannerView retain];
+  //
+  //   if (_tableBannerView) {
+  //     _tableBannerView.frame = [self rectForBannerView];
+  //     _tableBannerView.userInteractionEnabled = NO;
+  //     [self addToOverlayView:_tableBannerView];
+  //
+  //     if (animated) {
+  //       _tableBannerView.top += kBannerViewHeight;
+  //       [UIView beginAnimations:nil context:nil];
+  //       [UIView setAnimationDuration:TT_TRANSITION_DURATION];
+  //       [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+  //       _tableBannerView.top -= kBannerViewHeight;
+  //       [UIView commitAnimations];
+  //     }
+  //   }
+  // }
 }
 
 
